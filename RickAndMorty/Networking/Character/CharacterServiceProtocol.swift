@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol CharacterServiceProtocol {
-    func getAllCharacters(filter: CharacterFilter) -> AnyPublisher<CharactersResponse, Error>
+    func getAllCharacters(page: Int) -> AnyPublisher<CharactersResponse, Error>
     func getCharacter(id: Int) -> AnyPublisher<Character, Error>
     func getMultipleCharacters(ids: [Int]) -> AnyPublisher<[Character], Error>
 }

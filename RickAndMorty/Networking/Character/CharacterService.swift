@@ -9,9 +9,9 @@ import Foundation
 import Combine
 
 class CharacterService: CharacterServiceProtocol {
-    func getAllCharacters(filter: CharacterFilter) -> AnyPublisher<CharactersResponse, any Error> {
+    func getAllCharacters(page: Int) -> AnyPublisher<CharactersResponse, any Error> {
         URLSession.shared
-            .dataTaskPublisher(for: Endpoints.getAllCharactersURL())
+            .dataTaskPublisher(for: Endpoints.getAllCharactersURL(page: page))
             .map(\.data)
             .decode(type: CharactersResponse.self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)

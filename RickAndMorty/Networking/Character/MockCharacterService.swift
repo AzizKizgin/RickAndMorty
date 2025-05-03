@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class MockCharacterService: CharacterServiceProtocol {
-    func getAllCharacters(filter: CharacterFilter) -> AnyPublisher<CharactersResponse, any Error> {
+    func getAllCharacters(page: Int) -> AnyPublisher<CharactersResponse, any Error> {
         return Just(mockCharacters)
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
