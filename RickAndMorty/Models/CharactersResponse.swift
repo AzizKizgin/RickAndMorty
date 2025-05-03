@@ -13,8 +13,8 @@ struct CharactersResponse: Decodable {
 }
 
 struct Info: Decodable {
-    let count: Int
-    let pages: Int
-    let next: String?
-    let prev: String?
+    var count: Int = 0
+    var pages: Int = 0
+    var next: String?
+    var prev: String?
 }
