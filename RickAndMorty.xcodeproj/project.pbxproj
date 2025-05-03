@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E0F5B60A2DC6A32A0039F964 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = E0F5B6092DC6A32A0039F964 /* Swinject */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		E02A6BAA2DC697A2009AC20F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0F5B60A2DC6A32A0039F964 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = RickAndMorty;
 			packageProductDependencies = (
+				E0F5B6092DC6A32A0039F964 /* Swinject */,
 			);
 			productName = RickAndMorty;
 			productReference = E02A6B9C2DC697A1009AC20F /* RickAndMorty.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = E02A6B932DC697A1009AC20F;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E0F5B6082DC6A32A0039F964 /* XCRemoteSwiftPackageReference "Swinject" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E02A6B9D2DC697A1009AC20F /* Products */;
 			projectDirPath = "";
@@ -558,6 +567,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E0F5B6082DC6A32A0039F964 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E0F5B6092DC6A32A0039F964 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E0F5B6082DC6A32A0039F964 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E02A6B942DC697A1009AC20F /* Project object */;
 }
