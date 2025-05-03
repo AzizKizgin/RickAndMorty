@@ -11,14 +11,14 @@ enum Endpoints {
     private static let baseURL = "https://rickandmortyapi.com/api"
     private static let characterURL = "\(baseURL)/character"
     
-    public static func getAllCharactersURL() -> URL {
-        let urlString = "\(characterURL)/register"
+    public static func getAllCharactersURL(page: Int) -> URL {
+        let urlString = "\(characterURL)/?page=\(page)"
         let url = URL(string: urlString)!
         return url
     }
 
     public static func getCharacterURL(id: Int) -> URL {
-        let urlString = "\(characterURL)/register/\(id)"
+        let urlString = "\(characterURL)/\(id)"
         let url = URL(string: urlString)!
         return url
     }
