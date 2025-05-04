@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
-
+import SwiftData
 @main
 struct RickAndMortyApp: App {
+    @StateObject private var favManager = SavedCharacterManager.shared
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .modelContainer(for: SavedCharacter.self)
+                .environmentObject(favManager)
         }
     }
 }

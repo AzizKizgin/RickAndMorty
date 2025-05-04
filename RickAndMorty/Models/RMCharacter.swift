@@ -7,7 +7,24 @@
 
 import Foundation
 
-struct RMCharacter: Decodable, Hashable, Identifiable {
+struct RMCharacter: Decodable, Hashable, Identifiable, CharacterProtocol {
+    func toSavedCharacter() -> SavedCharacter {
+        SavedCharacter(
+            id: id,
+            name: name,
+            status: status,
+            species: species,
+            type: type,
+            gender: gender,
+            origin: origin,
+            location: location,
+            image: image,
+            episode: episode,
+            url: url,
+            created: created
+        )
+    }
+
     let id: Int
     let name: String
     let status: String
@@ -22,7 +39,7 @@ struct RMCharacter: Decodable, Hashable, Identifiable {
     let created: String
 }
 
-struct LocationReference: Decodable, Hashable {
+struct LocationReference: Codable, Hashable {
     let name: String
     let url: String
 }

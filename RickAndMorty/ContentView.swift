@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.modelContext) var modelContext
+    @EnvironmentObject var favManager: SavedCharacterManager
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        CharactersView()
+            .onAppear {
+                favManager.configure(context: modelContext)
+            }
     }
 }
 
