@@ -25,7 +25,7 @@ class CharactersViewModel: ObservableObject {
     }
     
     func fetchMore() {
-        guard !isLoading, currentPage < info.pages else {return}
+        guard !isLoading, currentPage <= info.pages else {return}
         getAllCharacters()
     }
     
@@ -42,7 +42,6 @@ class CharactersViewModel: ObservableObject {
                 }
             } receiveValue: { [weak self] value in
                 guard let self = self else { return }
-                print(value.results)
                 self.characters.append(contentsOf: value.results)
                 self.info = value.info
                 self.currentPage += 1
