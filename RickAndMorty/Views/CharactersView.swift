@@ -20,32 +20,41 @@ struct CharactersView: View {
     }
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: [
-                GridItem(.flexible()),
-                GridItem(.flexible())
-            ], spacing: 16) {
-                ForEach(viewModel.characters) { char in
-                    CharacterItem(char: char)
-                        .onAppear {
-                            if char == viewModel.characters.last {
-                                viewModel.fetchMore()
-                            }
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: [
+                    GridItem(.flexible()),
+                    GridItem(.flexible())
+                ], spacing: 16) {
+                    ForEach(viewModel.characters) { char in
+                        NavigationLink(value: char) {
+                            CharacterItem(char: char)
+                                .onAppear {
+                                    if char == viewModel.characters.last {
+                                        viewModel.fetchMore()
+                                    }
+                                }
                         }
+                    }
+                }
+                .padding(.horizontal)
+                .alert(viewModel.errorMessage, isPresented: $viewModel.showError) {
+                    
+                }
+                .navigationDestination(for: RMCharacter.self) { char in
+                    CharacterDetailView(character: char)
                 }
             }
-            .padding(.horizontal)
-            .alert(viewModel.errorMessage, isPresented: $viewModel.showError) {
-                
-            }
         }
-
+        .navigationTitle("Characters")
     }
 }
 
 #Preview {
-    CharactersView(
-        viewModel: CharactersViewModel(service: MockCharacterService())
-    )
+    NavigationStack {
+        CharactersView(
+            viewModel: CharactersViewModel(service: MockCharacterService())
+        )
+    }
 }
 
