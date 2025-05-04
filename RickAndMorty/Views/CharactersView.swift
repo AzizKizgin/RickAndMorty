@@ -19,17 +19,12 @@ struct CharactersView: View {
         }
     }
     
-    let items = Array(1...10) // Sample data
-
-    // Define two flexible columns
-    let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
-    
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: columns, spacing: 16) {
+            LazyVGrid(columns: [
+                GridItem(.flexible()),
+                GridItem(.flexible())
+            ], spacing: 16) {
                 ForEach(viewModel.characters) { char in
                     CharacterItem(char: char)
                         .onAppear {
