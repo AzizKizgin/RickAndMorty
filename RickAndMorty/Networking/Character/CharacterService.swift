@@ -8,32 +8,55 @@
 import Foundation
 import Combine
 
+enum NetworkError: Error {
+    case invalidURL
+    case decodingError
+    case unknown
+}
+
 class CharacterService: CharacterServiceProtocol {
-    func getAllCharacters(page: Int) -> AnyPublisher<CharactersResponse, any Error> {
-        URLSession.shared
+    func getAllCharacters(page: Int) -> AnyPublisher<CharactersResponse, NetworkError> {
+        return URLSession.shared
             .dataTaskPublisher(for: Endpoints.getAllCharactersURL(page: page))
             .map(\.data)
             .decode(type: CharactersResponse.self, decoder: JSONDecoder())
+            .mapError { error in
+                print(error)
+                if error is DecodingError {
+                    return NetworkError.decodingError
+                }
+                return NetworkError.unknown
+            }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
-
-    func getCharacter(id: Int) -> AnyPublisher<Character, any Error> {
-        URLSession.shared
+    
+    func getCharacter(id: Int) -> AnyPublisher<RMCharacter, NetworkError> {
+        return URLSession.shared
             .dataTaskPublisher(for: Endpoints.getCharacterURL(id: id))
             .map(\.data)
-            .decode(type: Character.self, decoder: JSONDecoder())
+            .decode(type: RMCharacter.self, decoder: JSONDecoder())
+            .mapError { error in
+                if error is DecodingError {
+                    return NetworkError.decodingError
+                }
+                return NetworkError.unknown
+            }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 
-    func getMultipleCharacters(ids: [Int]) -> AnyPublisher<[Character], any Error> {
-        URLSession.shared
-            .dataTaskPublisher(
-                for: Endpoints.getMultipleCharactersURL(ids: ids)
-            )
+    func getMultipleCharacters(ids: [Int]) -> AnyPublisher<[RMCharacter], NetworkError> {
+        return URLSession.shared
+            .dataTaskPublisher(for: Endpoints.getMultipleCharactersURL(ids: ids))
             .map(\.data)
-            .decode(type: [Character].self, decoder: JSONDecoder())
+            .decode(type: [RMCharacter].self, decoder: JSONDecoder())
+            .mapError { error in
+                if error is DecodingError {
+                    return NetworkError.decodingError
+                }
+                return NetworkError.unknown
+            }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
