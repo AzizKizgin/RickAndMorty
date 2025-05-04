@@ -18,5 +18,8 @@ class DIContainer {
         container.register(CharacterService.self) { _ in
             CharacterService()
         }
+        container.register(MockCharacterService.self) { _ in
+            MockCharacterService()
+        }
     }
 }

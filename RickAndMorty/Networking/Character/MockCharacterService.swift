@@ -9,23 +9,22 @@ import Foundation
 import Combine
 
 class MockCharacterService: CharacterServiceProtocol {
-    func getAllCharacters(page: Int) -> AnyPublisher<CharactersResponse, any Error> {
+    func getAllCharacters(page: Int) -> AnyPublisher<CharactersResponse, NetworkError> {
         return Just(mockCharacters)
-            .setFailureType(to: Error.self)
+            .setFailureType(to: NetworkError.self)
             .eraseToAnyPublisher()
     }
 
-    func getCharacter(id: Int) -> AnyPublisher<Character, any Error> {
+    func getCharacter(id: Int) -> AnyPublisher<RMCharacter, NetworkError> {
         return Just(rick)
-            .setFailureType(to: Error.self)
+            .setFailureType(to: NetworkError.self)
             .eraseToAnyPublisher()
     }
 
-    func getMultipleCharacters(ids: [Int]) -> AnyPublisher<[Character], any Error> {
-        return Just([rick,depp])
-            .setFailureType(to: Error.self)
+    func getMultipleCharacters(ids: [Int]) -> AnyPublisher<[RMCharacter], NetworkError> {
+        return Just([rick, depp])
+            .setFailureType(to: NetworkError.self)
             .eraseToAnyPublisher()
     }
-
-    
 }
+
