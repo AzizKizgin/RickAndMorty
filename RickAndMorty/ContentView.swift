@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
-    @EnvironmentObject var favManager: SavedCharacterManager
+    @EnvironmentObject var favManager: SavedCharactersManager
     var body: some View {
         CharactersView()
             .onAppear {

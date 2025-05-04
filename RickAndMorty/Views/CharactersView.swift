@@ -47,6 +47,16 @@ struct CharactersView: View {
             }
         }
         .navigationTitle("Characters")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink {
+                    
+                } label: {
+                    
+                }
+
+            }
+        }
     }
 }
 

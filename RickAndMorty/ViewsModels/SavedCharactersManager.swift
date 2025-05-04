@@ -8,8 +8,8 @@
 import Foundation
 import SwiftData
 
-final class SavedCharacterManager: ObservableObject {
-    static let shared = SavedCharacterManager()
+final class SavedCharactersManager: ObservableObject {
+    static let shared = SavedCharactersManager()
     @Published private(set) var favorites: [SavedCharacter] = []
     private var context: ModelContext?
     
