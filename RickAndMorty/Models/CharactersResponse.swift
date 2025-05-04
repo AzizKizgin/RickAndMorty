@@ -9,7 +9,7 @@ import Foundation
 
 struct CharactersResponse: Decodable {
     let info: Info
-    let results: [Character]
+    let results: [RMCharacter]
 }
 
 struct Info: Decodable {
