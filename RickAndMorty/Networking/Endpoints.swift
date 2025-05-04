@@ -12,7 +12,7 @@ enum Endpoints {
     private static let characterURL = "\(baseURL)/character"
     
     public static func getAllCharactersURL(page: Int) -> URL {
-        let urlString = "\(characterURL)/?page=1"
+        let urlString = "\(characterURL)/?page=\(page)"
         let url = URL(string: urlString)!
         return url
     }
