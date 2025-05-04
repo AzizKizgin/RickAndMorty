@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class CharactersViewModel: ObservableObject {
-    @Published var characters: [Character] = []
+    @Published var characters: [RMCharacter] = []
     @Published var currentPage: Int = 1
     @Published var info: Info = Info()
     @Published var isLoading: Bool = false
@@ -21,23 +21,31 @@ class CharactersViewModel: ObservableObject {
     
     init(service: CharacterServiceProtocol) {
         self.service = service
+        getAllCharacters()
+    }
+    
+    func fetchMore() {
+        guard !isLoading, currentPage < info.pages else {return}
+        getAllCharacters()
     }
     
     func getAllCharacters() {
-        guard info.next != nil, info.pages != currentPage else {return}
-        service.getAllCharacters(page: self.currentPage + 1)
+        guard !isLoading else { return }
+        
+        isLoading = true
+        service.getAllCharacters(page: currentPage)
             .sink { [weak self] result in
+                guard let self = self else { return }
+                self.isLoading = false
                 if case let .failure(error) = result {
-                    self?.setError(error.localizedDescription)
+                    self.setError(error.localizedDescription)
                 }
-                self?.isLoading = false
             } receiveValue: { [weak self] value in
-                guard let self else {return}
+                guard let self = self else { return }
+                print(value.results)
                 self.characters.append(contentsOf: value.results)
                 self.info = value.info
-                if let next = self.info.next {
-                    self.currentPage += 1
-                }
+                self.currentPage += 1
             }
             .store(in: &cancellables)
     }

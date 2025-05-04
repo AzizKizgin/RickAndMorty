@@ -8,11 +8,49 @@
 import SwiftUI
 
 struct CharactersView: View {
+    @StateObject private var viewModel: CharactersViewModel
+    
+    init(viewModel: CharactersViewModel? = nil) {
+        if let viewModel = viewModel {
+            _viewModel = StateObject(wrappedValue: viewModel)
+        } else {
+            let service = DIContainer.shared.container.resolve(CharacterService.self)!
+            _viewModel = StateObject(wrappedValue: CharactersViewModel(service: service))
+        }
+    }
+    
+    let items = Array(1...10) // Sample data
+
+    // Define two flexible columns
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            LazyVGrid(columns: columns, spacing: 16) {
+                ForEach(viewModel.characters) { char in
+                    CharacterItem(char: char)
+                        .onAppear {
+                            if char == viewModel.characters.last {
+                                viewModel.fetchMore()
+                            }
+                        }
+                }
+            }
+            .padding(.horizontal)
+            .alert(viewModel.errorMessage, isPresented: $viewModel.showError) {
+                
+            }
+        }
+
     }
 }
 
 #Preview {
-    CharactersView()
+    CharactersView(
+        viewModel: CharactersViewModel(service: MockCharacterService())
+    )
 }
+
