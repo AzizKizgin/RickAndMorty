@@ -21,7 +21,6 @@ class CharacterService: CharacterServiceProtocol {
             .map(\.data)
             .decode(type: CharactersResponse.self, decoder: JSONDecoder())
             .mapError { error in
-                print(error)
                 if error is DecodingError {
                     return NetworkError.decodingError
                 }
