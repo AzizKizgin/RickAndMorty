@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CharacterItem: View {
     @EnvironmentObject var scManager: SavedCharactersManager
-    let char: RMCharacter
+    let char: CharacterProtocol
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             let isSaved = scManager.isFavorite(id: char.id)
