@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CharacterDetailView: View {
-    let character: RMCharacter
+    let character: any CharacterProtocol
     var body: some View {
         ScrollView {
             VStack {
