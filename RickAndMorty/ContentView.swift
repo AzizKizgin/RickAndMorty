@@ -11,10 +11,12 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @EnvironmentObject var favManager: SavedCharactersManager
     var body: some View {
-        CharactersView()
-            .onAppear {
-                favManager.configure(context: modelContext)
-            }
+        NavigationStack {
+            CharactersView()
+                .onAppear {
+                    favManager.configure(context: modelContext)
+                }
+        }
     }
 }
 

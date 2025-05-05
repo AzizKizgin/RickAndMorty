@@ -20,7 +20,6 @@ struct CharactersView: View {
     }
     
     var body: some View {
-        NavigationStack {
             ScrollView {
                 LazyVGrid(columns: [
                     GridItem(.flexible()),
@@ -45,7 +44,7 @@ struct CharactersView: View {
                     CharacterDetailView(character: char)
                 }
             }
-        }
+      
         .navigationTitle("Characters")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -62,10 +61,12 @@ struct CharactersView: View {
 }
 
 #Preview {
+    @Previewable @StateObject var scManager = SavedCharactersManager.shared
     NavigationStack {
         CharactersView(
             viewModel: CharactersViewModel(service: MockCharacterService())
         )
     }
+    .environmentObject(scManager)
 }
 
