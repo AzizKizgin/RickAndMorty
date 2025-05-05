@@ -19,7 +19,6 @@ struct RMCharacter: Decodable, Hashable, Identifiable, CharacterProtocol {
             origin: origin,
             location: location,
             image: image,
-            episode: episode,
             url: url,
             created: created
         )

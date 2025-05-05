@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct CharacterItem: View {
+    @EnvironmentObject var scManager: SavedCharactersManager
     let char: RMCharacter
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
+            let isSaved = scManager.isFavorite(id: char.id)
             AsyncImage(url: URL(string: char.image)) { phase in
                 switch phase {
                 case .success(let image):
@@ -24,6 +26,21 @@ struct CharacterItem: View {
                     CharacterPlaceholder()
                         .frame(maxHeight: .infinity)
                 }
+            }
+            .overlay(alignment: .topTrailing) {
+                Button {
+                    if isSaved {
+                        scManager.removeFavorite(id: char.id)
+                    }
+                    else {
+                        scManager.addFavorite(character: char)
+                    }
+                } label: {
+                    Image(systemName: isSaved ? "heart.fill": "heart")
+                        .padding(10)
+                        .font(.title)
+                }
+
             }
 
             VStack(alignment: .leading, spacing: 4) {
@@ -51,5 +68,7 @@ struct CharacterItem: View {
 }
 
 #Preview {
+    @Previewable @StateObject var scManager = SavedCharactersManager.shared
     CharacterItem(char: rick1)
+        .environmentObject(scManager)
 }

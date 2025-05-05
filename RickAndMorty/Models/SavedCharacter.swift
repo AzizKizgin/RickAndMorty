@@ -23,7 +23,6 @@ class SavedCharacter: CharacterProtocol, Hashable {
     var origin: LocationReference
     var location: LocationReference
     var image: String
-    var episode: [String]
     var url: String
     var created: String
 
@@ -37,7 +36,6 @@ class SavedCharacter: CharacterProtocol, Hashable {
         origin: LocationReference,
         location: LocationReference,
         image: String,
-        episode: [String],
         url: String,
         created: String
     ) {
@@ -50,7 +48,6 @@ class SavedCharacter: CharacterProtocol, Hashable {
         self.origin = origin
         self.location = location
         self.image = image
-        self.episode = episode
         self.url = url
         self.created = created
     }

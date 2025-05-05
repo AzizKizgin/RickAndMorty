@@ -50,9 +50,10 @@ struct CharactersView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink {
-                    
+                    SavedCharactersView()
                 } label: {
-                    
+                    Image(systemName: "heart.fill")
+                        .font(.title2)
                 }
 
             }

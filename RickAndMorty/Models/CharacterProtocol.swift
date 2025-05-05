@@ -17,7 +17,6 @@ protocol CharacterProtocol {
     var origin: LocationReference { get }
     var location: LocationReference { get }
     var image: String { get }
-    var episode: [String] { get }
     var url: String { get }
     var created: String { get }
     
